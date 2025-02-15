@@ -176,12 +176,11 @@ int main(void)
 	  float distLeft = adcValues[0];
 	  float distRight = adcValues[1];
 
-	  // Scale the error so it's not crazy large
 	  float error = distLeft - distRight;
-	  float scaledError = error / 500.0f;  // Tuning value - adjust this
+	  float scaledError = error / 500.0f;
 
 	  // Proportional control
-	  float Kp = 0.8; // You can start around 1.0 because we scaled down
+	  float Kp = 0.8;
 	  float correction = Kp * scaledError;
 
 	  float baseSpeed = 20;
@@ -214,45 +213,11 @@ int main(void)
 		  {
 			  if (distance_mm < 60)
 			  {
-				  // Object is closer than 60mm – do something!
 				  HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_1);
 				  HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_4);
 			  }
 		  }
 
-	 if ((distRight < 700) && (isNextTileOpen)){
-
-		  HAL_Delay(80);
-		  // make the turn
-		  setRightMotorPWM(0);
-		  setLeftMotorPWM(30);
-
-		  HAL_Delay(400); //let it turn 1 second
-
-		  //setReverseRightMotorPWM(20);
-		  setLeftMotorPWM(20);
-
-		  setRightMotorPWM(20);
-
-
-	  }
-
-	 if ((distLeft < 700) && (isNextTileOpen)){
-
-	 		  HAL_Delay(80);
-	 		  // make the turn
-	 		  setLeftMotorPWM(0);
-	 		  setRightMotorPWM(30);
-
-	 		  HAL_Delay(400); //let it turn 1 second
-
-	 		  //setReverseRightMotorPWM(20);
-	 		  setLeftMotorPWM(20);
-
-	 		  setRightMotorPWM(20);
-
-
-	 	  }
 
 
 	  if (distLeft < 700 && distRight < 700){
@@ -311,7 +276,41 @@ int main(void)
 
 
 	  	  }
+/**
+		 if ((distRight < 700) && (isNextTileOpen)){
 
+			  HAL_Delay(80);
+			  // make the turn
+			  setRightMotorPWM(0);
+			  setLeftMotorPWM(30);
+
+			  HAL_Delay(400); //let it turn 1 second
+
+			  //setReverseRightMotorPWM(20);
+			  setLeftMotorPWM(20);
+
+			  setRightMotorPWM(20);
+
+
+		  }
+
+		 if ((distLeft < 700) && (isNextTileOpen)){
+
+		 		  HAL_Delay(80);
+		 		  // make the turn
+		 		  setLeftMotorPWM(0);
+		 		  setRightMotorPWM(30);
+
+		 		  HAL_Delay(400); //let it turn 1 second
+
+		 		  //setReverseRightMotorPWM(20);
+		 		  setLeftMotorPWM(20);
+
+		 		  setRightMotorPWM(20);
+
+
+		 	  }
+**/
 
 
 	  HAL_Delay(100);
